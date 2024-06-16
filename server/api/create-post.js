@@ -4,6 +4,8 @@ const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
+  console.log(body);
+
   const res = await prisma.posts.create({
     data: {
       userId: body.userId,

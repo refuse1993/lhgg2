@@ -9,7 +9,7 @@
             v-for="post in posts"
             :key="post"
           >
-            <Post :post="post" @isDeleted="posts = []" />
+            <Post :post="post" @isDeleted="posts = userStore.getAllPost()" />
           </div>
           <div v-else>
             <client-only>

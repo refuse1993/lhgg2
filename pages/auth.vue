@@ -46,7 +46,7 @@ const login = async (prov) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
-      redirectTo: config.public.redirectUri,
+      redirectTo: "/",
     },
   });
 

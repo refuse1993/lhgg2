@@ -147,10 +147,14 @@ const createPost = async () => {
   let errorOut = null;
 
   isLoading.value = true;
+
   if (fileData.value) {
     const { data, error } = await client.storage
       .from("main-files")
-      .upload("${uuidv4().jpg}", fileData.value);
+      .upload(`${uuidv4()}.jpg`, fileData.value);
+
+    dataOut = data;
+    errorOut = error;
   }
 
   if (errorOut) {
@@ -164,7 +168,7 @@ const createPost = async () => {
   }
 
   try {
-    await useFetch("/api/create-post", {
+    await useFetch(`/api/create-post/`, {
       method: "POST",
       body: {
         userId: user.value.identities[0].user_id,
@@ -174,8 +178,15 @@ const createPost = async () => {
         picture: pic,
       },
     });
+
     await userStore.getAllPosts();
     userStore.isMenuOverlay = false;
-  } catch (error) {}
+
+    clearData();
+    isLoading.value = false;
+  } catch (error) {
+    console.log(error);
+    isLoading.value = false;
+  }
 };
 </script>
