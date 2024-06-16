@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   let posts = await prisma.posts.findMany({
     orderby: { id: "desc" },
-    include: { likes: ture },
+    include: { likes: true },
   });
   return posts;
 });

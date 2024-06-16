@@ -33,15 +33,20 @@ const user = useSupabaseUser();
 
 watchEffect(() => {
   if (user.value) {
-    console.log(user.value);
+    console.log("User is logged in:", user.value);
     return navigateTo("/");
+  } else {
+    console.log("No user is logged in");
   }
 });
 
 const login = async (prov) => {
+  console.log("Login provider:", prov); // prov 값을 로그로 출력하여 확인
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
-    redirectTo: window.location.origin,
+    options: {
+      redirectTo: window.location.origin,
+    },
   });
 
   if (error) console.log(error);
