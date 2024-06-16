@@ -30,6 +30,7 @@
 <script setup>
 const client = useSupabaseClient();
 const user = useSupabaseUser();
+const config = useRuntimeConfig();
 
 watchEffect(() => {
   if (user.value) {
@@ -45,7 +46,7 @@ const login = async (prov) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
-      redirectTo: window.location.origin,
+      redirectTo: config.public.redirectUri,
     },
   });
 

@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       bucketUrl: process.env.BUCKET_URL,
+      redirectUri: process.env.NUXT_PUBLIC_REDIRECT_URI,
     },
   },
   devtools: { enabled: false },
