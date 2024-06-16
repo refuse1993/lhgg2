@@ -60,7 +60,7 @@ let isLoading = ref(false);
 
 watchEffect(() => {
   if (!user.value) {
-    return navigateTo("/");
+    return navigateTo("/auth");
   }
 });
 
